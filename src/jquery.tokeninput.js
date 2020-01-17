@@ -384,16 +384,6 @@
                   focusWithTimeout(input_box);
               }
           })
-          .mouseover(function (event) {
-              var li = $(event.target).closest("li");
-              if(li && selected_token !== this) {
-              }
-          })
-          .mouseout(function (event) {
-              var li = $(event.target).closest("li");
-              if(li && selected_token !== this) {
-              }
-          })
           .insertBefore(hiddenInput);
 
       // The token holding the input box

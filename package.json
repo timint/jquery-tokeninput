@@ -1,10 +1,11 @@
 {
-  "name": "jquery.tokeninput",
-  "version": "2.0.0",
-  "devDependencies": {
-    "grunt": "~0.4.2",
-    "grunt-contrib-jshint": "~0.6.3",
-    "grunt-contrib-nodeunit": "~0.2.0",
-    "grunt-contrib-uglify": "~0.3.2"
-  }
+	"name": "jquery.tokeninput",
+	"version": "1.6.2",
+	"devDependencies": {
+		"grunt": "^1.0.4",
+		"grunt-contrib-less": "^2.0.0",
+		"grunt-contrib-uglify": "^4.0.1",
+		"grunt-text-replace": "^0.4.0",
+		"less-plugin-clean-css": "^1.5.1"
+	}
 }

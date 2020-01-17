@@ -73,23 +73,6 @@
     disabled: false
   };
 
-  // Default classes to use when theming
-  var DEFAULT_CLASSES = {
-    tokenList            : "token-input-list",
-    token                : "token-input-token",
-    tokenReadOnly        : "token-input-token-readonly",
-    tokenDelete          : "token-input-delete-token",
-    selectedToken        : "token-input-selected-token",
-    highlightedToken     : "token-input-highlighted-token",
-    dropdown             : "token-input-dropdown",
-    dropdownItem         : "token-input-dropdown-item",
-    dropdownItem2        : "token-input-dropdown-item2",
-    selectedDropdownItem : "token-input-selected-dropdown-item",
-    inputToken           : "token-input-input-token",
-    focused              : "token-input-focused",
-    disabled             : "token-input-disabled"
-  };
-
   // Input box position "enum"
   var POSITION = {
     BEFORE : 0,
@@ -218,20 +201,6 @@
       } else if (typeof(url_or_data) === "object") {
           // Set the local data to search through
           $(input).data("settings").local_data = url_or_data;
-      }
-
-      // Build class names
-      if($(input).data("settings").classes) {
-          // Use custom class names
-          $(input).data("settings").classes = $.extend({}, DEFAULT_CLASSES, $(input).data("settings").classes);
-      } else if($(input).data("settings").theme) {
-          // Use theme-suffixed default class names
-          $(input).data("settings").classes = {};
-          $.each(DEFAULT_CLASSES, function(key, value) {
-              $(input).data("settings").classes[key] = value + "-" + $(input).data("settings").theme;
-          });
-      } else {
-          $(input).data("settings").classes = DEFAULT_CLASSES;
       }
 
       // Save the tokens
@@ -407,8 +376,8 @@
       var selected_dropdown_item = null;
 
       // The list to store the token items in
-      var token_list = $("<ul />")
-          .addClass($(input).data("settings").classes.tokenList)
+      var token_list = $("<ul class="form-control" />")
+          .addClass("token-input-list")
           .click(function (event) {
               var li = $(event.target).closest("li");
               if(li && li.get(0) && $.data(li.get(0), "tokeninput")) {
@@ -426,26 +395,22 @@
           .mouseover(function (event) {
               var li = $(event.target).closest("li");
               if(li && selected_token !== this) {
-                  li.addClass($(input).data("settings").classes.highlightedToken);
               }
           })
           .mouseout(function (event) {
               var li = $(event.target).closest("li");
               if(li && selected_token !== this) {
-                  li.removeClass($(input).data("settings").classes.highlightedToken);
               }
           })
           .insertBefore(hiddenInput);
 
       // The token holding the input box
-      var input_token = $("<li />")
-          .addClass($(input).data("settings").classes.inputToken)
+      var input_token = $("<li class="input" />")
           .appendTo(token_list)
           .append(input_box);
 
       // The list to store the dropdown items in
-      var dropdown = $("<div/>")
-          .addClass($(input).data("settings").classes.dropdown)
+      var dropdown = $("<div class="token-input-dropdown dropdown" />")
           .appendTo("body")
           .hide();
 
@@ -608,8 +573,7 @@
 
           // The 'delete token' button
           if(!readonly) {
-            $("<span>" + $(input).data("settings").deleteText + "</span>")
-                .addClass($(input).data("settings").classes.tokenDelete)
+          $("<span class="delete">&times;</span>")
                 .appendTo($this_token)
                 .click(function () {
                     if (!$(input).data("settings").disabled) {
@@ -692,7 +656,7 @@
       // Select a token in the token list
       function select_token (token) {
           if (!$(input).data("settings").disabled) {
-              token.addClass($(input).data("settings").classes.selectedToken);
+              token.addClass(".active");
               selected_token = token.get(0);
 
               // Hide input box

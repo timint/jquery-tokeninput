@@ -210,9 +210,6 @@
 
       // Create a new text input an attach keyup events
       var input_box = $("<input type=\"text\" autocomplete=\"off\" autocapitalize=\"off\"/>")
-          .css({
-              outline: "none"
-          })
           .attr("id", $(input).data("settings").idPrefix + input.id)
           .focus(function () {
               if ($(input).data("settings").disabled) {

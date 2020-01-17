@@ -241,7 +241,6 @@
               $(this).val("");
               token_list.removeClass($(input).data("settings").classes.focused);
           })
-          .bind("keyup keydown blur update", resize_input)
           .keydown(function (event) {
               var previous_token;
               var next_token;
@@ -414,21 +413,6 @@
           .appendTo("body")
           .hide();
 
-      // Magic element to help us resize the text input
-      var input_resizer = $("<tester/>")
-          .insertAfter(input_box)
-          .css({
-              position: "absolute",
-              top: -9999,
-              left: -9999,
-              width: "auto",
-              fontSize: input_box.css("fontSize"),
-              fontFamily: input_box.css("fontFamily"),
-              fontWeight: input_box.css("fontWeight"),
-              letterSpacing: input_box.css("letterSpacing"),
-              whiteSpace: "nowrap"
-          });
-
       // Pre-populate list if items exist
       hiddenInput.val("");
       var li_data = $(input).data("settings").prePopulate || hiddenInput.data("pre");
@@ -497,9 +481,6 @@
           toggleDisabled(disable);
       };
 
-      // Resize input to maximum width so the placeholder can be seen
-      resize_input();
-
       //
       // Private functions
       //
@@ -531,18 +512,6 @@
               hide_dropdown();
               return;
           }
-      }
-
-      function resize_input() {
-          if(input_val === (input_val = input_box.val())) {return;}
-
-          // Get width left on the current line
-          var width_left = token_list.width() - input_box.offset().left - token_list.offset().left;
-          // Enter new content into resizer and resize input accordingly
-          input_resizer.html(_escapeHTML(input_val) || _escapeHTML(settings.placeholder));
-          // Get maximum width, minimum the size of input and maximum the widget's width
-          input_box.width(Math.min(token_list.width(),
-                                   Math.max(width_left, input_resizer.width() + 30)));
       }
 
       function add_freetagging_tokens() {

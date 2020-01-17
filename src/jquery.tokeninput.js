@@ -28,10 +28,9 @@
     hintText: "Type in a search term",
     noResultsText: "No results",
     searchingText: "Searching...",
-    deleteText: "&#215;",
     animateDropdown: true,
     placeholder: null,
-    theme: null,
+
     zindex: 999,
     resultsLimit: null,
 

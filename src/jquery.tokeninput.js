@@ -73,13 +73,6 @@
     disabled: false
   };
 
-  // Input box position "enum"
-  var POSITION = {
-    BEFORE : 0,
-    AFTER  : 1,
-    END    : 2
-  };
-
   // Keys "enum"
   var KEY = {
     BACKSPACE    : 8,
@@ -258,9 +251,9 @@
 						   (next_token.length && next_token.get(0) === selected_token)) {
                             // Check if there is a previous/next token and it is selected
                             if(event.keyCode === KEY.LEFT || event.keyCode === KEY.UP) {
-                                deselect_token($(selected_token), POSITION.BEFORE);
+                                deselect_token($(selected_token), "before");
                             } else {
-                                deselect_token($(selected_token), POSITION.AFTER);
+                                deselect_token($(selected_token), "after");
                             }
                         } else if((event.keyCode === KEY.LEFT || event.keyCode === KEY.UP) && previous_token.length) {
                             // We are moving left, select the previous token if it exists
@@ -384,7 +377,7 @@
               } else {
                   // Deselect selected token
                   if(selected_token) {
-                      deselect_token($(selected_token), POSITION.END);
+                    deselect_token($(selected_token), "end");
                   }
 
                   // Focus input box
@@ -641,10 +634,10 @@
           token.removeClass($(input).data("settings").classes.selectedToken);
           selected_token = null;
 
-          if(position === POSITION.BEFORE) {
+          if(position === "before") {
               input_token.insertBefore(token);
               selected_token_index--;
-          } else if(position === POSITION.AFTER) {
+          } else if(position === "after") {
               input_token.insertAfter(token);
               selected_token_index++;
           } else {
@@ -661,11 +654,11 @@
           var previous_selected_token = selected_token;
 
           if(selected_token) {
-              deselect_token($(selected_token), POSITION.END);
+            deselect_token($(selected_token), "end");
           }
 
           if(previous_selected_token === token.get(0)) {
-              deselect_token(token, POSITION.END);
+            deselect_token(token, "end");
           } else {
               select_token(token);
           }
@@ -885,7 +878,7 @@
 
           if(query && query.length) {
               if(selected_token) {
-                  deselect_token($(selected_token), POSITION.AFTER);
+                deselect_token($(selected_token), "after");
               }
 
               if(query.length >= $(input).data("settings").minChars) {

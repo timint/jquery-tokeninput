@@ -91,8 +91,8 @@
     '&' : '&amp;',
     '<' : '&lt;',
     '>' : '&gt;',
-    ''' : '&quot;',
-    ''' : '&#x27;',
+    '"' : '&quot;',
+    '\'' : '&#x27;',
     '/' : '&#x2F;'
   };
 
@@ -377,7 +377,7 @@
       .insertBefore(hiddenInput);
 
     // The token holding the input box
-    var input_token = $('<li class='input' />')
+    var input_token = $('<li class="input" />')
       .appendTo(token_list)
       .append(input_box);
 
@@ -515,7 +515,7 @@
 
       // The 'delete token' button
       if (!readonly) {
-      $('<span class='delete'>&times;</span>')
+      $('<span class="delete">&times;</span>')
         .appendTo($this_token)
         .click(function() {
           if (!$(input).data('settings').disabled) {

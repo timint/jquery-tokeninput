@@ -65,9 +65,6 @@
     onDelete: null,
     onReady: null,
 
-    // Other settings
-    idPrefix: 'token-input-',
-
     // Keep track if the input is currently in disabled mode
     disabled: false
   };
@@ -210,7 +207,6 @@
 
     // Create a new text input an attach keyup events
     var input_box = $('<input type="text" autocomplete="off" autocapitalize="off" />')
-      .attr('id', $(input).data('settings').idPrefix + input.id)
       .focus(function() {
         if ($(input).data('settings').disabled) {
           return false;
